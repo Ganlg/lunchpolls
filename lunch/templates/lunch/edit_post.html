@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <h2>Update your post</h2>
+    <form action="{% url 'lunch:edit_post' slug %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        {{ form|crispy }}
+        </div>
+        <button class='btn btn-success' type="submit">Submit</button>
+        <a class='btn btn-default' href="/">Cancel</a>
+    </form>
+</div>
+{% endblock %}

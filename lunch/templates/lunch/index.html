@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    
+    {% include 'nav_buttons.html' %}
+    
+    <br><br>
+    {% if user.is_authenticated %}
+    <ul class="nav nav-tabs">
+        <li {% if tab == '1' %} class="active" {% endif %}><a href="{% url 'lunch:index_arg' 1 %}">All Published Posts</a></li>
+        <li {% if tab == '2' %} class="active" {% endif %}><a href="{% url 'lunch:index_arg' 2 %}">{{user}}'s Posts</a></li>
+        <li {% if tab == '3' %} class="active" {% endif %}><a href="{% url 'lunch:index_arg' 3 %}">{{user}}'s Published Posts</a></li>
+        <li {% if tab == '4' %} class="active" {% endif %}><a href="{% url 'lunch:index_arg' 4 %}">{{user}}'s Drafts</a></li>
+    </ul>
+    {% endif %}
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Time</th>
+                <th>Comment</th>
+                <th>Created by</th>
+                <th>Status</th>
+                <th>Votes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if posts %}
+            {% for post in posts %}
+                <tr {% if user.is_authenticated %}class="clickable-row" data-href="{% url 'lunch:detail_post' post.slug %}"{% endif %}>
+                    <td>{{post}}</td>
+                    <td>{{post.time}}</td>
+                    <td>{{post.comment}}</td>
+                    <td>{{post.author}}</td>
+                    <td>{{post.status}}</td>
+                    <td>{{post.votes}}</td>
+                    {% if user == post.author or user.is_staff %}
+                    
+                    <td>
+                        <a href="{% url 'lunch:edit_post' post.slug %}" class='btn btn-success btn-xs'>&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</a>
+                        <a href="{% url 'lunch:delete_post' post.slug %}" class='btn btn-danger btn-xs'>Delete</a>
+                    
+                    </td>
+                    
+                    
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $('.clickable-row').click(function(){
+        window.document.location = $(this).data('href');
+    })
+
+
+</script>
+{% endblock %}

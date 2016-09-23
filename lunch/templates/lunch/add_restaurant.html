@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class='container'>
+    <h2>Add a new Restaurant</h2>
+    <form action="." method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        {{ form|crispy }}
+        </div>
+        <button class='btn btn-success' type="submit">Submit</button>
+        <a class='btn btn-default' href="{% url 'lunch:view_restaurant' %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}
