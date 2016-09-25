@@ -4,15 +4,6 @@
     <list default="true" id="e7f35ff3-89a1-4f36-938f-74ca59d7951e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LunchPoll/settings.py" afterPath="$PROJECT_DIR$/LunchPoll/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/forms.py" afterPath="$PROJECT_DIR$/account/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/models.py" afterPath="$PROJECT_DIR$/account/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/views.py" afterPath="$PROJECT_DIR$/account/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/forms.py" afterPath="$PROJECT_DIR$/lunch/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/models.py" afterPath="$PROJECT_DIR$/lunch/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/templates/lunch/index.html" afterPath="$PROJECT_DIR$/lunch/templates/lunch/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/templates/lunch/view_restaurants.html" afterPath="$PROJECT_DIR$/lunch/templates/lunch/view_restaurants.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/urls.py" afterPath="$PROJECT_DIR$/lunch/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/views.py" afterPath="$PROJECT_DIR$/lunch/views.py" />
     </list>
     <ignored path="LunchPoll.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -52,6 +43,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LunchPoll/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="27" column="47" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lunch/forms.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -64,7 +65,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lunch/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
@@ -111,9 +112,9 @@
         <option value="$PROJECT_DIR$/account/views.py" />
         <option value="$PROJECT_DIR$/lunch/urls.py" />
         <option value="$PROJECT_DIR$/lunch/models.py" />
-        <option value="$PROJECT_DIR$/LunchPoll/settings.py" />
         <option value="$PROJECT_DIR$/lunch/forms.py" />
         <option value="$PROJECT_DIR$/lunch/views.py" />
+        <option value="$PROJECT_DIR$/LunchPoll/settings.py" />
       </list>
     </option>
   </component>
@@ -660,14 +661,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LunchPoll/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lunch/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -685,6 +678,14 @@
           <folding>
             <element signature="e#0#73#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LunchPoll/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="27" column="47" selection-start-line="27" selection-start-column="47" selection-end-line="27" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
