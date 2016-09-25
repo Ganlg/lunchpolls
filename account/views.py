@@ -8,14 +8,21 @@ from django.contrib import messages
 
 # Create your views here.
 def user_login(request):
+    next_page = '/'
+    if request.method == 'GET':
+        next_page = request.GET['next']
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        next_page = request.POST['next']
+
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-    return redirect('/')
+                return redirect(next_page)
+    return render(request, 'account/login.html', {'next': next_page})
 
 
 @login_required

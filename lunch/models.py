@@ -25,6 +25,9 @@ class Restaurant(models.Model):
         return self.restaurant
 
 
+def two_hour_lag():
+    return timezone.now() + timezone.timedelta(hours=2)
+
 class Post(models.Model):
     STATUS_CHOICE = (
         ('draft', 'Draft'),
@@ -32,7 +35,7 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=250, null=False)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-    time = models.DateTimeField(default=timezone.now)
+    time = models.DateTimeField(default=two_hour_lag)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     comment = models.TextField(null=False, blank=True)

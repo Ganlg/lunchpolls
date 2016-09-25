@@ -11,18 +11,19 @@
         <thead>
             <tr>
                 <th>Restaurant</th>
-                <th>Link</th>
-
+                {% if user.is_staff %}
+                <th></th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
         {% if restaurants %}
             {% for restaurant in restaurants %}
-                <tr>
-                    <td>{{restaurant}}</td>
-                    <td>{{restaurant.link}}</td>
+                <tr class='clickable-row' data-href='{{restaurant.link}}' data-search='{{restaurant}}'>
+                    <td >{{restaurant}}</td>
                     {% if user.is_staff %}
-                    <td><a href="{% url 'lunch:delete_restaurant' restaurant.id %}" class='btn btn-danger btn-xs pull-right'>Delete</a></td>
+                    <td class='text-right'><a href="{% url 'lunch:edit_restaurant' restaurant.id %}" class='btn btn-success btn-xs'>&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</a>
+                    <a href="{% url 'lunch:delete_restaurant' restaurant.id %}" class='btn btn-danger btn-xs'>Delete</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}
@@ -30,4 +31,20 @@
         </tbody>
     </table>
 </div>
+<script>
+$('.clickable-row').click(function(){
+    url = $(this).data('href');
+    if(url == ""){
+        restaurant = $(this).data('search');
+        url = "https://www.google.com/#q=site:www.yelp.com " + restaurant;
+    }
+    var win = window.open(url, '_blank');
+    win.focus();
+})
+
+$(".clickable-row a").click(function(e) {
+   e.stopPropagation();
+})
+
+</script>
 {% endblock %}

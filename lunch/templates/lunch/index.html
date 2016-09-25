@@ -39,7 +39,7 @@
                     <td>{{post.votes}}</td>
                     {% if user == post.author or user.is_staff %}
                     
-                    <td>
+                    <td class='text-right'>
                         <a href="{% url 'lunch:edit_post' post.slug %}" class='btn btn-success btn-xs'>&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</a>
                         <a href="{% url 'lunch:delete_post' post.slug %}" class='btn btn-danger btn-xs'>Delete</a>
                     
@@ -57,8 +57,10 @@
 <script>
     $('.clickable-row').click(function(){
         window.document.location = $(this).data('href');
+    });
+    $(".clickable-row a").click(function(e) {
+        e.stopPropagation();
     })
-
 
 </script>
 {% endblock %}

@@ -27,3 +27,11 @@ class ChangePassword(forms.Form):
         if cd['new_password'] != cd['new_password2']:
             raise forms.ValidationError('Passwords don\'t match')
         return cd['new_password2']
+
+
+class LoginForm(forms.ModelForm):
+    password = forms.CharField(max_length=100,widget=forms.PasswordInput, label='Password')
+
+    class Meta:
+        model = User
+        fields = ('username', 'password')

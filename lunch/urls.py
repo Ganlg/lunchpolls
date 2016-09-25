@@ -30,5 +30,6 @@ urlpatterns = [
 
     url(r'^restaurant/add/$', views.add_restaurant, name='add_restaurant'),
     url(r'^restaurant/view/$',views.view_restaurant, name='view_restaurant'),
-    url(r'^restaurant/delete/(?P<pk>[0-9]+)/$', views.delete_restaurant, name='delete_restaurant')
+    url(r'^restaurant/delete/(?P<pk>[0-9]+)/$', views.delete_restaurant, name='delete_restaurant'),
+    url(r'^restaurant/edit/(?P<pk>[0-9]+)/$', views.edit_restaurant, name='edit_restaurant')
 ]

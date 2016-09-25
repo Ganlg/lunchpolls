@@ -8,6 +8,7 @@ from .forms import PostForm, RestForm
 from django.db.models import Avg
 
 
+
 # Create your views here.
 def index(request, tab=None):
     tab = tab or '1'
@@ -39,8 +40,9 @@ def create_post(request):
     form = PostForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
+            import random
             new_post = form.save(commit=False)
-            new_post.slug = slugify(new_post.title)
+            new_post.slug = slugify(new_post.title + " " + timezone.now().strftime('%B %d, %Y, %I:%M %p') + str(random.randint(0,100)))
             new_post.author = request.user
             new_post.save()
             return redirect('/')
@@ -67,6 +69,17 @@ def delete_restaurant(request, pk):
         rest = Restaurant.objects.get(pk=pk)
         rest.delete()
     return redirect(reverse("lunch:view_restaurant"))
+
+@login_required
+def edit_restaurant(request, pk):
+    rest = Restaurant.objects.get(pk=pk)
+    form = RestForm(instance=rest)
+    if request.user.is_staff:
+        if request.POST:
+            if form.is_valid():
+                form.save()
+                return redirect(reverse("lunch:view_restaurant"))
+    return render(request, 'lunch/edit_restaurant.html', {'form': form})
 
 @login_required
 def detail_post(request, slug):
@@ -114,7 +127,7 @@ def detail_post(request, slug):
 @login_required
 def delete_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    if request.user == post.author:
+    if request.user == post.author or request.user.is_staff:
         post.delete()
     if 'HTTP_REFERER' in request.META:
         referer = request.META['HTTP_REFERER']
