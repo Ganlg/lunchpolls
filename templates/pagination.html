@@ -1,0 +1,12 @@
+    <div class="text-center">
+        <ul class="pager">
+            {% if page.has_previous %}
+            <li><a href="?page={{page.previous_page_number}}">Previous</a></li>
+            {% endif %}
+            <li>Page {{page.number}} of {{ page.paginator.num_pages}}</li>
+            {% if page.has_next %}
+            <li><a href="?page={{ page.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+        
+    </div>

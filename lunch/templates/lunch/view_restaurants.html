@@ -30,6 +30,8 @@
         {% endif %}
         </tbody>
     </table>
+    
+    {% include "pagination.html" with page=restaurants %} 
 </div>
 <script>
 $('.clickable-row').click(function(){

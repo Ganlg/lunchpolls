@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Post, Restaurant, Vote
 from .forms import PostForm, RestForm
 from django.db.models import Avg
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -16,23 +16,33 @@ def index(request, tab=None):
         'posts': None,
         'tab': tab
     }
-    if request.user.is_authenticated:
-        user_posts = Post.objects.filter(author=request.user)
-        user_published = Post.published.filter(author=request.user)
-        user_drafts = Post.drafted.filter(author=request.user)
-        if tab == '2':
-            args['posts'] = user_posts
-        elif tab == '3':
-            args['posts'] = user_published
-        elif tab == '4':
-            args['posts'] = user_drafts
-        else:
-            published = Post.published.all()
-            args['posts'] = published
-    else:
-        published = Post.published.all()
-        args['posts'] = published
+    object_list = None
 
+    if request.user.is_authenticated:
+        if tab == '2':
+            object_list = Post.objects.filter(author=request.user)
+        elif tab == '3':
+            object_list = Post.published.filter(author=request.user)
+
+        elif tab == '4':
+            object_list = Post.drafted.filter(author=request.user)
+
+        else:
+            object_list = Post.published.all()
+
+    else:
+        object_list = Post.published.all()
+
+    page = request.GET.get('page')
+    num_pg = 20
+    paginator = Paginator(object_list, num_pg)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    args['posts'] = posts
     return render(request, 'lunch/index.html', args)
 
 @login_required
@@ -60,7 +70,17 @@ def add_restaurant(request):
 
 
 def view_restaurant(request):
-    rest = Restaurant.objects.all()
+    object_list = Restaurant.objects.all()
+    num_pg = 20
+    paginator = Paginator(object_list, num_pg)
+    page = request.GET.get('page')
+    try:
+        rest = paginator.page(page)
+    except PageNotAnInteger:
+        rest = paginator.page(1)
+    except EmptyPage:
+        rest = paginator.page(paginator.num_pages)
+
     return render(request, 'lunch/view_restaurants.html', {'restaurants': rest})
 
 @login_required

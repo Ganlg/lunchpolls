@@ -35,7 +35,7 @@ class Post(models.Model):
     )
     title = models.CharField(max_length=250, null=False)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-    time = models.DateTimeField(default=two_hour_lag)
+    time = models.DateTimeField(default=two_hour_lag, db_index=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     comment = models.TextField(null=False, blank=True)
@@ -53,7 +53,7 @@ class Post(models.Model):
     drafted = DraftManager()
 
     class Meta:
-        ordering = ('publish',)
+        ordering = ('-time',)
 
     def __str__(self):
         return self.title
