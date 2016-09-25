@@ -30,7 +30,7 @@
         <tbody>
         {% if posts %}
             {% for post in posts %}
-                <tr {% if user.is_authenticated %}class="clickable-row" data-href="{% url 'lunch:detail_post' post.slug %}"{% endif %}>
+                <trclass="clickable-row" data-href="{% url 'lunch:detail_post' post.slug %}">
                     <td>{{post}}</td>
                     <td>{{post.time}}</td>
                     <td>{{post.comment}}</td>
