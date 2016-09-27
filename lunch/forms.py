@@ -14,7 +14,7 @@ class PostForm(forms.ModelForm):
 class RestForm(forms.ModelForm):
     class Meta:
         model = Restaurant
-        fields = ['restaurant', 'link']
+        fields = ['restaurant', 'comment', 'link']
 
 
 

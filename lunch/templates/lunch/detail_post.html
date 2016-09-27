@@ -35,21 +35,60 @@
         <h3>First Vote</h3>
         <select class="form-control" name="first">
             {% for rest in restaurants %}
-                <option value={{rest.id}}>{{rest}}</option>
+                <option value={{rest.id}}>
+                    {% if rest.comment %}
+                    {% with rest.restaurant|add:" ("|add:rest.comment|add:")" as varname %}
+                    {{varname }}
+                    {% endwith %}
+                    {%else%}
+                    {{ rest }}
+                    {%endif%}
+                </option>
             {% endfor %}
         </select>
         
         <h3>Second Vote</h3>
         <select class="form-control" name="second">
             {% for rest in restaurants %}
-                <option value={{rest.id}}>{{rest}}</option>
+                <option value={{rest.id}}>
+                    {% if rest.comment %}
+                    {% with rest.restaurant|add:" ("|add:rest.comment|add:")" as varname %}
+                    {{varname }}
+                    {% endwith %}
+                    {%else%}
+                    {{ rest }}
+                    {%endif%}
+                </option>
             {% endfor %}
         </select>
         
         <h3>Third Vote</h3>
         <select class="form-control" name="third">
             {% for rest in restaurants %}
-                <option value={{rest.id}}>{{rest}}</option>
+                <option value={{rest.id}}>
+                    {% if rest.comment %}
+                    {% with rest.restaurant|add:" ("|add:rest.comment|add:")" as varname %}
+                    {{varname }}
+                    {% endwith %}
+                    {%else%}
+                    {{ rest }}
+                    {%endif%}
+                </option>
+            {% endfor %}
+        </select>
+            
+        <h3>Least Favorite</h3>
+        <select class="form-control" name="exlcude">
+            {% for rest in restaurants %}
+                <option value={{rest.id}}>
+                    {% if rest.comment %}
+                    {% with rest.restaurant|add:" ("|add:rest.comment|add:")" as varname %}
+                    {{varname }}
+                    {% endwith %}
+                    {%else%}
+                    {{ rest }}
+                    {%endif%}
+                </option>
             {% endfor %}
         </select>
         </div>
@@ -92,9 +131,20 @@
             <tbody>
             {% for vote in vote_detail %}
                 {% if forloop.counter|add:-1|divisibleby:3 %}
-                    <tr><td>{{vote.user}}</td><td>{{vote.restaurant}}</td>
+                    <tr><td>{{vote.user}}</td><td>{% if vote.restaurant.comment %}
+                        {% with vote.restaurant.restaurant|add:" ("|add:vote.restaurant.comment|add:")" as varname%}
+                        {{ varname }}
+                        {% endwith %}
+                    {%else%}
+                    {{ vote.restaurant }}
+                    {%endif%}</td>
                 {% else %}
-                        <td>{{vote.restaurant}}</td>
+                        <td>{% if vote.restaurant.comment %}
+                    {% with vote.restaurant.restaurant|add:" ("|add:vote.restaurant.comment|add:")" as varname%}
+                        {{varname }}
+                        {% endwith %}
+                    {%else%}
+                    {{ vote.restaurant }}{%endif%}</td>
                 {% endif %}
                         
                 {% if forloop.counter|divisibleby:3 %}

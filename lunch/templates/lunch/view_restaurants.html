@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Restaurant</th>
+                <th>Comment</th>
                 {% if user.is_staff %}
                 <th></th>
                 {% endif %}
@@ -21,6 +22,7 @@
             {% for restaurant in restaurants %}
                 <tr class='clickable-row' data-href='{{restaurant.link}}' data-search='{{restaurant}}'>
                     <td >{{restaurant}}</td>
+                    <td>{{restaurant.comment}}</td>
                     {% if user.is_staff %}
                     <td class='text-right'><a href="{% url 'lunch:edit_restaurant' restaurant.id %}" class='btn btn-success btn-xs'>&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</a>
                     <a href="{% url 'lunch:delete_restaurant' restaurant.id %}" class='btn btn-danger btn-xs'>Delete</a></td>

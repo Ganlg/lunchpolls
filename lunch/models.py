@@ -16,6 +16,7 @@ class DraftManager(models.Manager):
 
 class Restaurant(models.Model):
     restaurant = models.CharField(max_length=250, null=False, blank=False, unique=True)
+    comment = models.CharField(max_length=200, null=True, blank=True, default="")
     link = models.URLField(null=True, blank=True)
 
     class Meta:
