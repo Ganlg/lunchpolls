@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!bbqgi--!9-kwhxcn4x&)s2dxg#z7y(140ol11+j0cy8q@o^^r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['fedexlunch.pythonanywhere.com']
 
@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'crispy_forms',
+    'channels',
 
     # local
     'lunch',
-    'account'
+    'account',
+    'chat'
 ]
 
 MIDDLEWARE = [
@@ -122,12 +124,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static")
-# ]
+STATICFILES_DIRS = [
+]
 STATIC_URL = '/static/'
-STATIC_ROOT =  os.path.join(BASE_DIR, "static")
+STATIC_ROOT =  []
 
+if DEBUG:
+    STATICFILES_DIRS += os.path.join(BASE_DIR, "static")
+else:
+    STATIC_ROOT += os.path.join(BASE_DIR, "static")
 
 
 LOGIN_URL='/account/login/'
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgiref.inmemory.ChannelLayer',
+        'ROUTING': 'chat.routing.channel_routing',
+    },
+}

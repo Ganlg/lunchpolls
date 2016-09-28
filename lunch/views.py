@@ -7,6 +7,7 @@ from .models import Post, Restaurant, Vote
 from .forms import PostForm, RestForm
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 
 # Create your views here.
@@ -114,7 +115,8 @@ def detail_post(request, slug):
         r2 = get_object_or_404(Restaurant, pk=request.POST['second'])
         r3 = get_object_or_404(Restaurant, pk=request.POST['third'])
         ex = get_object_or_404(Restaurant, pk=request.POST['exclude'])
-        if r1 != r2 and r2 != r3 and r1 != r3:
+        if not(r1.pk in [r2.pk, r3.pk, ex.pk] or r2.pk in [r1.pk, r3.pk, ex.pk]
+               or r3.pk in [r1.pk, r2.pk, ex.pk] or ex.pk in [r1.pk, r2.pk, r3.pk]):
             for i, rest in enumerate([r1, r2, r3, ex]):
                 rank = 3 - i
                 if i == 3:
@@ -125,6 +127,8 @@ def detail_post(request, slug):
             post.votes += 1
             post.save()
             return redirect(reverse('lunch:detail_post', args=[slug]))
+        else:
+            messages.error(request, 'Your choices have to be different!')
 
     vote_detail = None
     top1 = 'Not Voted'
