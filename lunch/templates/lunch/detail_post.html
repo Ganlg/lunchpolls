@@ -164,5 +164,75 @@
             </tbody>
         </table>
     {% endif %}
+    <br>    
+    <h3 class="">Comments</h3>
+    <div id="comments">
+        {%if comments %}
+            {% for comment in comments %}
+                <h6 class="bg-info">{{comment.timestamp}}</h6>
+                <h5><span class="text-primary">{{comment.user}}: </span>{{comment.message}}</h5>
+            
+            {% endfor %}
+        
+        {% endif %}
+    </div>
+    <br>
+    <div class="form-horizontal" role="form" id="send-comment">
+        <div class="form-group">
+            <div class="col-sm-11">
+                <input type="text" id="comment" class="form-control" placeholder="Leave a message" 
+                       onkeypress="pressEnter(event)">
+            </div>
+            <div class="col-sm-1 text-left">
+                <button class="btn btn-primary" type="button">Send</button>
+            </div>
+        </div>
+    </div>
 </div>
+<style>
+    .horizontal-line{
+        border-bottom: 2px solid #DDD;
+    }
+    #comments{
+        border: 2px solid #DDD;
+        width: 100%;
+        height: 400px;
+        overflow-y: auto;
+    }
+</style>
+<script>
+    $("#comments").scrollTop($("#comments")[0].scrollHeight)
+    var ws_scheme = window.location.protocol == "https:" ? "wss://" : "ws://";
+    var ws = new WebSocket(ws_scheme +  window.location.host + '/' + {{post.pk}} + '/')
+    
+    ws.onmessage = function(message) {
+        var data = JSON.parse(message.data);
+
+        $('#comments').append(
+            '<h6 class="bg-info">'+data.timestamp+'</h6>'+
+            '<h5><span class="text-primary">'+data.user+':</span> '+data.message+ '</h5>'
+            );
+        $("#comments").scrollTop($("#comments")[0].scrollHeight)
+    };
+    
+    $("#send-comment button").click(function(e){
+        if($("#comment").val()=="")
+            return;
+        
+        var message = {
+            user: "{{request.user}}",
+            message: $('#comment').val(),
+        }
+        $("#comment").val("");
+        ws.send(JSON.stringify(message));
+    });
+    
+    function pressEnter(event){
+        if (event.which == 13) {
+            $("#send-comment button").click();
+        }
+    }
+
+
+</script>
 {% endblock %}

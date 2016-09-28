@@ -8,6 +8,7 @@ from .forms import PostForm, RestForm
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from chat.models import Message
 
 
 # Create your views here.
@@ -109,6 +110,7 @@ def detail_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
     restaurants = Restaurant.objects.all()
     voted = len(Vote.objects.filter(post=post, user=request.user)) > 0 or post.time < timezone.now()
+    comments = Message.objects.filter(post=post)
 
     if request.method == 'POST' and not voted:
         r1 = get_object_or_404(Restaurant, pk=request.POST['first'])
@@ -152,7 +154,8 @@ def detail_post(request, slug):
         'top1': top1,
         'top2': top2,
         'score1': score1,
-        'score2': score2
+        'score2': score2,
+        'comments': comments
     })
 
 @login_required
