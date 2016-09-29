@@ -3,12 +3,12 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
-from .models import Post, Restaurant, Vote
+from .models import Post, Restaurant, Vote, Message
 from .forms import PostForm, RestForm
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
-from chat.models import Message
+
 
 
 # Create your views here.
@@ -187,3 +187,14 @@ def edit_post(request, slug):
             # else:
             return redirect(reverse('lunch:index'))
     return render(request, 'lunch/edit_post.html', {'form': form, 'slug': slug})
+
+
+@login_required
+def send_message(request, slug):
+
+    message = request.POST['message']
+    if message:
+        post = get_object_or_404(Post, slug=slug)
+        user = request.user
+        new_msg = Message.objects.create(post=post, user=user,message=message)
+    return redirect(reverse('lunch:detail_post', args=[slug]))
