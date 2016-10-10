@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="e7f35ff3-89a1-4f36-938f-74ca59d7951e" name="Default" comment="" />
+=======
+    <list default="true" id="e7f35ff3-89a1-4f36-938f-74ca59d7951e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/account/templates/account/edit_profile.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0001_initial.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0002_post_votes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0003_auto_20160923_0659.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0004_auto_20160923_1951.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0005_auto_20160925_1710.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0006_restaurant_comment.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0007_auto_20160926_2136.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lunch/migrations/0008_message.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/forms.py" afterPath="$PROJECT_DIR$/account/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/templates/account/index.html" afterPath="$PROJECT_DIR$/account/templates/account/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/urls.py" afterPath="$PROJECT_DIR$/account/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/views.py" afterPath="$PROJECT_DIR$/account/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/admin.py" afterPath="$PROJECT_DIR$/lunch/admin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/models.py" afterPath="$PROJECT_DIR$/lunch/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/templates/lunch/detail_post.html" afterPath="$PROJECT_DIR$/lunch/templates/lunch/detail_post.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/templates/lunch/index.html" afterPath="$PROJECT_DIR$/lunch/templates/lunch/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lunch/views.py" afterPath="$PROJECT_DIR$/lunch/views.py" />
+    </list>
+>>>>>>> 5b0498b8fbcd6e190ce6c447249af7d98ddefdb8
     <ignored path="LunchPoll.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

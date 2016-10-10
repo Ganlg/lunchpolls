@@ -50,10 +50,12 @@ def index(request, tab=None):
     args['posts'] = posts
 
     month1 = date.today().month
+    day1 =date.today().day
     month2 = (month1 + 1) % 12
+
     if month2 == 0:
         month2 = 12
-    birthdays =Birthday.objects.filter(Q(birth_date__month=month1)|Q(birth_date__month=month2))
+    birthdays =Birthday.objects.filter(Q(birth_date__month=month1, birth_date__day__gte=day1)|Q(birth_date__month=month2))
     birthdays = [{'user': b.user, 'birth_date': b.month_day} for b in birthdays]
     birthdays = sorted(birthdays, key=lambda x: x['birth_date'])
     args['birthdays'] = birthdays
