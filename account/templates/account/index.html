@@ -19,6 +19,10 @@
                 <td>{{ user.last_name }}</td>
             </tr>
             <tr>
+                <td>Birthday</td>
+                <td>{{user.birthday.birth_date}}</td>
+            </tr>
+            <tr>
                 <td>Date Joined</td>
                 <td>{{ user.date_joined }}</td>
             </tr>
@@ -29,7 +33,7 @@
         </tbody>
     
     </table>
-    
+    <a href="{% url 'account:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
     <a href="{% url 'account:change_password' %}" class="btn btn-success">Change Password</a>
 
 </div>

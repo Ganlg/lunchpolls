@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 
+
 # Create your models here.
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -75,3 +76,12 @@ class Message(models.Model):
 
     class Meta:
         ordering = ("timestamp",)
+
+
+class Birthday(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    birth_date = models.DateField(null=True, blank=True)
+
+    @property
+    def month_day(self):
+        return self.birth_date.strftime('%m-%d')

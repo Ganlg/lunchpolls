@@ -3,11 +3,13 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
-from .models import Post, Restaurant, Vote, Message
+from .models import Post, Restaurant, Vote, Message, Birthday
 from .forms import PostForm, RestForm
 from django.db.models import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from datetime import date, timedelta
+from django.db.models import Q
 
 
 
@@ -16,7 +18,8 @@ def index(request, tab=None):
     tab = tab or '1'
     args = {
         'posts': None,
-        'tab': tab
+        'tab': tab,
+        'birthdays': None
     }
     object_list = None
 
@@ -45,6 +48,16 @@ def index(request, tab=None):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     args['posts'] = posts
+
+    month1 = date.today().month
+    month2 = (month1 + 1) % 12
+    if month2 == 0:
+        month2 = 12
+    birthdays =Birthday.objects.filter(Q(birth_date__month=month1)|Q(birth_date__month=month2))
+    birthdays = [{'user': b.user, 'birth_date': b.month_day} for b in birthdays]
+    birthdays = sorted(birthdays, key=lambda x: x['birth_date'])
+    args['birthdays'] = birthdays
+
     return render(request, 'lunch/index.html', args)
 
 @login_required

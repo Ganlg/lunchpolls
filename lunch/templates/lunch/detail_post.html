@@ -141,7 +141,7 @@
             <tbody>
             {% for vote in vote_detail %}
                 {% if forloop.counter|add:-1|divisibleby:4 %}
-                    <tr><td>{{vote.user}}</td><td>{% if vote.restaurant.comment %}
+                    <tr><td>{% if vote.user.first_name %} {{vote.user.first_name}} {%else %} {{voet.user}}{%endif %}</td><td>{% if vote.restaurant.comment %}
                         {% with vote.restaurant.restaurant|add:" ("|add:vote.restaurant.comment|add:")" as varname%}
                         {{ varname }}
                         {% endwith %}
@@ -170,7 +170,7 @@
         {%if comments %}
             {% for comment in comments %}
                 <h6 class="bg-info">{{comment.timestamp}}</h6>
-                <h5><span class="text-primary">{{comment.user}}: </span>{{comment.message}}</h5>
+                <h5><span class="text-primary">{% if comment.user.first_name %} {{comment.user.first_name}} {%else %} {{comment.user}}{%endif %}: </span>{{comment.message}}</h5>
             
             {% endfor %}
         
