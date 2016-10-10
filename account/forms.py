@@ -5,10 +5,11 @@ from django.contrib.auth.models import User
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(max_length=100, widget=forms.PasswordInput)
     password2 = forms.CharField(max_length=100, widget=forms.PasswordInput, label='Confirm Password')
+    birth_date = forms.DateField(required=True, widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}))
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'birth_date', 'password', 'password2', ]
 
     def clean_password2(self):
         cd = self.cleaned_data
@@ -35,3 +36,10 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+
+class EditProfileForm(forms.Form):
+    username = forms.CharField(disabled=True, required=False)
+    first_name = forms.CharField(max_length=100, label='First Name', required=False)
+    last_name = forms.CharField(max_length=100,label='Last Name', required=False)
+    birthday = forms.DateField(required=False, widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}))
